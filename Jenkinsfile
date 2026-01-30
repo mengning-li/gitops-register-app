@@ -35,8 +35,8 @@ pipeline {
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
                 """
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/mengning-li/gitops-register-app main"
+                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                  sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/mengning-li/gitops-register-app.git main"
                 }
             }
         }
